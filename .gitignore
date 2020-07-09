@@ -1,0 +1,6 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/src/Desktop.Win/Desktop.Win/bin/x64/Debug
+/src/Desktop.Win/Desktop.Win/obj
