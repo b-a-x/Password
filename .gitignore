@@ -4,3 +4,5 @@
 
 /src/Desktop.Win/Desktop.Win/bin/x64/Debug
 /src/Desktop.Win/Desktop.Win/obj
+/src/Desktop.Win/bin
+/src/Desktop.Win/obj
