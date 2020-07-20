@@ -4,7 +4,9 @@ using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Desktop.Win.Data;
 using Desktop.Win.Pages;
+using Microsoft.EntityFrameworkCore;
 
 namespace Desktop.Win
 {
@@ -21,6 +23,8 @@ namespace Desktop.Win
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            using (var context = new ApplicationContext())
+                context.Database.Migrate();
         }
 
         /// <summary>

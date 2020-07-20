@@ -19,6 +19,11 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="1" Visibility="Collapsed"
+                           Text="{x:Bind Name}"
+                           x:Phase="1"
+                           Style="{ThemeResource BaseTextBlockStyle}"
+                           Margin="12,6,0,0"/>
                 <Ellipse x:Name="Ellipse"
                          Grid.RowSpan="2"
                          Width ="32"
@@ -48,9 +53,9 @@
             ItemTemplate="{StaticResource PasswordInfoListViewTemplate}" Margin="0,0,0,48"/>
 
         <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" VerticalAlignment="Bottom" Margin="0,0,0,7">
-            <AppBarButton Icon="Add" Label="Добавить" />
-            <AppBarButton Icon="Edit" Label="Изменить"/>
-            <AppBarButton Icon="Delete" Label="Удалить"/>
+            <AppBarButton Icon="Add" Label="Добавить" Click="HomeCreateOnClick"/>
+            <AppBarButton Icon="Edit" Label="Изменить" Click="HomeUpdateOnClick"/>
+            <AppBarButton Icon="Delete" Label="Удалить" Click="HomeDeleteOnClick"/>
         </CommandBar>
     </Grid>
 </Page>
