@@ -2,9 +2,9 @@
 {
     public class PasswordInfo
     {
-        internal int Id { get; set; }
-        internal string Name { get; set; }
-        internal string Login { get; set; }
-        internal string Password { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
     }
 }

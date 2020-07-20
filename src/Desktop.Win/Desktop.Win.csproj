@@ -123,12 +123,19 @@
     <Compile Include="Converters\BooltoVisabilityConverter.cs" />
     <Compile Include="Data\ApplicationContext.cs" />
     <Compile Include="Data\Configurations\PasswordInfoConfiguration .cs" />
+    <Compile Include="Data\Encryption\EncryptedAttribute.cs" />
+    <Compile Include="Data\Encryption\EncryptionConverter.cs" />
+    <Compile Include="Data\Encryption\IEncryptionProvider.cs" />
+    <Compile Include="Data\Encryption\KeyInfo.cs" />
+    <Compile Include="Data\Encryption\KeySize.cs" />
+    <Compile Include="Data\Encryption\AesProvider.cs" />
+    <Compile Include="Data\Encryption\ModelBuilderExtensions.cs" />
+    <Compile Include="Data\Encryption\PropertyBuilderExtensions.cs" />
     <Compile Include="Model\PasswordInfo.cs" />
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Lesson.cs" />
-    <Compile Include="Model\Phone.cs" />
     <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
