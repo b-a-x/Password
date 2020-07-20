@@ -4,26 +4,53 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="using:Desktop.Win.ViewModel"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <DataTemplate x:Key="PasswordInfoListViewTemplate" x:DataType="viewModel:PasswordInfoVM">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Ellipse x:Name="Ellipse"
+                         Grid.RowSpan="2"
+                         Width ="32"
+                         Height="32"
+                         Margin="6"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Center"
+                         Fill="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
+                <TextBlock Grid.Column="1"
+                           Text="{x:Bind Name}"
+                           x:Phase="1"
+                           Style="{ThemeResource BaseTextBlockStyle}"
+                           Margin="12,6,0,0"/>
+                <TextBlock  Grid.Column="1"
+                            Grid.Row="1"
+                            Text="{x:Bind Login}"
+                            x:Phase="2"
+                            Style="{ThemeResource BodyTextBlockStyle}"
+                            Margin="12,0,0,6"/>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
     <Grid>
-        <Button x:Name="AddButton" Width="100"  Height="40" Background="LightGray" Content="Добавить" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,60,0"/>
-        <ListView ItemsSource="{Binding LessonList}" Margin="0,40,0,10">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderBrush="Black">
-                        <StackPanel Margin="10">
-                            <TextBlock Text="{Binding Title}" FontWeight="Bold"/>
-                            <TextBlock Text="{Binding Author}"/>
-                            <StackPanel>
-                                <TextBlock Text="#"/>
-                                <TextBlock Text="{Binding Number}"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <ListView
+            x:Name ="HomePageListView"
+            SelectionMode="Single"
+            ItemTemplate="{StaticResource PasswordInfoListViewTemplate}" Margin="0,0,0,48"/>
+
+        <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" VerticalAlignment="Bottom" Margin="0,0,0,7">
+            <AppBarButton Icon="Add" Label="Добавить" />
+            <AppBarButton Icon="Edit" Label="Изменить"/>
+            <AppBarButton Icon="Delete" Label="Удалить"/>
+        </CommandBar>
     </Grid>
 </Page>
