@@ -11,7 +11,7 @@ namespace Desktop.Win.Data.Migration
         public DateTime DataCreated { get; set; }
 
         public string CreateScript => $"INSERT INTO MigrationsHistory ({nameof(Number)}, {nameof(Name)}, {nameof(DataCreated)}) VALUES({Number}, '{Name}', datetime());";
-        public static string CreateTable = "Create table [MigrationsHistory]([Id] integer primary key,[Number] [int] not null,[Name] [nvarchar(max)] not null,[DataCreated] [datetime2] not null)";
+        public static string CreateTable = "Create table if not exists [MigrationsHistory]([Id] integer primary key,[Number] [int] not null,[Name] [nvarchar(max)] not null,[DataCreated] [datetime2] not null)";
 
         public bool Equals(MigrationsHistory other)
         {
