@@ -1,4 +1,5 @@
 ﻿using Desktop.Win.Data.Configurations;
+using Desktop.Win.Data.Migration;
 using Desktop.Win.Model;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +22,7 @@ namespace Desktop.Win.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new PasswordInfoConfiguration());
+            builder.UseMigrationsHistory();
             base.OnModelCreating(builder);
         }
     }

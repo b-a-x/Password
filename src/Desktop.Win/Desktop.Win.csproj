@@ -131,6 +131,10 @@
     <Compile Include="Data\Encryption\AesProvider.cs" />
     <Compile Include="Data\Encryption\ModelBuilderExtensions.cs" />
     <Compile Include="Data\Encryption\PropertyBuilderExtensions.cs" />
+    <Compile Include="Data\Migration\DbContextExtensions.cs" />
+    <Compile Include="Data\Migration\MigrationsHistory.cs" />
+    <Compile Include="Data\Migration\MigrationsHistoryConfiguration.cs" />
+    <Compile Include="Data\Migration\ModelBuilderExtensions.cs" />
     <Compile Include="Model\PasswordInfo.cs" />
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -202,7 +206,9 @@
       <Version>6.2.10</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Sql\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
