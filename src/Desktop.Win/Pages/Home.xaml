@@ -50,9 +50,9 @@
         <ListView
             x:Name ="HomePageListView"
             SelectionMode="Single"
-            ItemTemplate="{StaticResource PasswordInfoListViewTemplate}" Margin="0,0,0,48"/>
+            ItemTemplate="{StaticResource PasswordInfoListViewTemplate}" Margin="0,40,0,0"/>
 
-        <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" VerticalAlignment="Bottom" Margin="0,0,0,7">
+        <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" VerticalAlignment="Top" Margin="0,0,0,7">
             <AppBarButton Icon="Add" Label="Добавить" Click="HomeCreateOnClick"/>
             <AppBarButton Icon="Edit" Label="Изменить" Click="HomeUpdateOnClick"/>
             <AppBarButton Icon="Delete" Label="Удалить" Click="HomeDeleteOnClick"/>
