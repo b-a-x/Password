@@ -11,18 +11,19 @@ namespace Desktop.Win.Pages
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private NavigationViewItemBase oldItem;
+        private string pageTypeName;
         
         public MainPage()
         {
             this.InitializeComponent();
-            ContentFrame.Navigate(GetPageType(nameof(Home)), null);
+            pageTypeName = nameof(Home);
+            ContentFrame.Navigate(GetPageType(pageTypeName), null);
         }
 
         private void NavigationViewOnItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
             NavigationViewItemBase item = args.InvokedItemContainer;
-            if (oldItem == item)
+            if (pageTypeName.Equals(item.Name))
                 return;
 
             FrameNavigationOptions navOptions = new FrameNavigationOptions
@@ -36,7 +37,7 @@ namespace Desktop.Win.Pages
             }
 
             ContentFrame.NavigateToType(GetPageType(item.Name), null, navOptions);
-            oldItem = item;
+            pageTypeName = item.Name;
         }
 
         private Type GetPageType(string pageName)

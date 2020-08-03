@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using Windows.Storage;
+using Windows.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,5 +23,7 @@ namespace Desktop.Win.Pages
                 return $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
             }
         }
+
+        public string LocationDatabase => ApplicationData.Current.LocalFolder.Path;
     }
 }
