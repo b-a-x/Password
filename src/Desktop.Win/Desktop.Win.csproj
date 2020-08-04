@@ -170,6 +170,7 @@
     <Content Include="Assets\Square44x44Logo.scale-200.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Sql\1_Добавить поле OldPassword.sql" />
     <Content Include="Sql\TODO.txt" />
   </ItemGroup>
   <ItemGroup>

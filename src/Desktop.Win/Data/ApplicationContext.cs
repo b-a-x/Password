@@ -7,11 +7,6 @@ namespace Desktop.Win.Data
 {
     public sealed class ApplicationContext : DbContext
     {
-        public ApplicationContext()
-        {
-            Database.EnsureCreated();
-        }
-
         public DbSet<PasswordInfo> PasswordInfos { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

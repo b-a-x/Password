@@ -15,6 +15,8 @@ namespace Desktop.Win.Data.Migration
             builder.Property(u => u.Number).HasColumnName("Number").IsRequired();
             builder.Property(u => u.Name).HasColumnName("Name").IsRequired();
             builder.Property(u => u.DataCreated).HasColumnName("DataCreated").IsRequired();
+            
+            builder.Ignore(u => u.FullPatch);
         }
     }
 }

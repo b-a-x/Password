@@ -34,5 +34,11 @@ namespace Desktop.Win.ViewModel
             get => PasswordInfo.Password;
             set => PasswordInfo.Password = value;
         }
+
+        public string OldPassword
+        {
+            get => PasswordInfo.OldPassword;
+            set => PasswordInfo.OldPassword = value;
+        }
     }
 }

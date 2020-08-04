@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
@@ -10,28 +9,42 @@ namespace Desktop.Win.Data.Migration
     {
         public static void Migrate(this DbContext context)
         {
-            ///TODO TimeOut
-            try
+            //TODO TimeOut
+            if (context.Database.EnsureCreated())
+                context.FirstRun();
+            else
+                context.Restart();
+        }
+
+        public static void FirstRun(this DbContext context)
+        {
+            HashSet<MigrationsHistory> migrationsHistoriesFromFiles = context.GetMigrationsHistoriesFromFiles();
+            if (migrationsHistoriesFromFiles.Count > 0)
+                context.Database.ExecuteSqlRaw(string.Concat(migrationsHistoriesFromFiles.Select(x => $"{x.CreateScript}")));
+        }
+
+        public static void Restart(this DbContext context)
+        {
+            HashSet<MigrationsHistory> migrationsHistoriesFromFiles = context.GetMigrationsHistoriesFromFiles();
+            if (migrationsHistoriesFromFiles.Count > 0)
             {
-                List<FileInfo> fileInfos = Directory.EnumerateFiles(Path.Combine(Windows.ApplicationModel.Package.Current.InstalledLocation.Path, "Sql"), "*.sql", SearchOption.AllDirectories)
-                                                            .Select(x => new FileInfo
-                                                            {
-                                                                Name = Path.GetFileName(x),
-                                                                FullPatch = Path.GetFullPath(x),
-                                                                Number = int.Parse(Path.GetFileName(x).Split('_')[MigrationsHistory.IndexNumber])
-                                                            }).ToList();
-                if (fileInfos.Count > 0)
+                var migrationsHistoriesFromDb = context.Set<MigrationsHistory>().ToArray();
+                if (migrationsHistoriesFromFiles.Count != migrationsHistoriesFromDb.Length)
                 {
-                    //TODO Как проверить существует ли таблица миграции??
-                    context.Database.ExecuteSqlRaw(MigrationsHistory.CreateTable);
-                    context.Database.ExecuteSqlRaw(string.Concat(fileInfos.Except(context.Set<MigrationsHistory>().ToList())
-                            .Select(x => $"{File.ReadAllText(((FileInfo)x).FullPatch)} {x.CreateScript}")));
+                    migrationsHistoriesFromFiles.ExceptWith(migrationsHistoriesFromDb);
+                    if (migrationsHistoriesFromFiles.Count > 0)
+                        context.Database.ExecuteSqlRaw(string.Concat(migrationsHistoriesFromFiles.Select(x => $"{File.ReadAllText(x.FullPatch)} {x.CreateScript}")));
                 }
             }
-            catch (Exception e)
-            {
-                throw e;
-            }
+        }
+
+        public static HashSet<MigrationsHistory> GetMigrationsHistoriesFromFiles(this DbContext context)
+        {
+            return Directory.EnumerateFiles(Path.Combine(Windows.ApplicationModel.Package.Current.InstalledLocation.Path, "Sql"), "*.sql", SearchOption.AllDirectories)
+                .Select(x => new MigrationsHistory(int.Parse(Path.GetFileName(x).Split('_')[MigrationsHistory.IndexNumber]), Path.GetFileName(x))
+                {
+                    FullPatch = Path.GetFullPath(x),
+                }).ToHashSet();
         }
     }
 }

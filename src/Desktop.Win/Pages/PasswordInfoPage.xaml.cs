@@ -33,6 +33,7 @@ namespace Desktop.Win.Pages
                 nameBox.Text = passwordInfo.Name;
                 loginBox.Text = passwordInfo.Login;
                 passwordBox.Text = passwordInfo.Password;
+                oldPasswordBox.Text = passwordInfo.OldPassword;
             }
         }
 
@@ -45,6 +46,7 @@ namespace Desktop.Win.Pages
                     passwordInfo.Name = nameBox.Text;
                     passwordInfo.Login = loginBox.Text;
                     passwordInfo.Password = passwordBox.Text;
+                    passwordInfo.OldPassword = oldPasswordBox.Text;
                     context.PasswordInfos.Update(passwordInfo.PasswordInfo);
                 }
                 else
@@ -53,7 +55,8 @@ namespace Desktop.Win.Pages
                     {
                         Name = nameBox.Text,
                         Login = loginBox.Text,
-                        Password = passwordBox.Text
+                        Password = passwordBox.Text,
+                        OldPassword = oldPasswordBox.Text
                     });
                 }
 

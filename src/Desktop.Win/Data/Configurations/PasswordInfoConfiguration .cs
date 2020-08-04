@@ -8,6 +8,7 @@ namespace Desktop.Win.Data.Configurations
 {
     public class PasswordInfoConfiguration : IEntityTypeConfiguration<PasswordInfo>
     {
+        //TODO: Сделать асинхронное шифрование
         private IEncryptionProvider provider = new AesProvider(Encoding.UTF8.GetBytes("keqwertyuiopqwertyuiqwertyuioqwe"), Encoding.UTF8.GetBytes("qwertyuiopqwerty"));
 
         public void Configure(EntityTypeBuilder<PasswordInfo> builder)
@@ -20,6 +21,7 @@ namespace Desktop.Win.Data.Configurations
             builder.Property(u => u.Name).HasColumnName("Name").IsRequired();
             builder.Property(u => u.Login).HasColumnName("Login").IsRequired().IsEncrypted(provider);
             builder.Property(u => u.Password).HasColumnName("Password").IsRequired().IsEncrypted(provider);
+            builder.Property(u => u.OldPassword).HasColumnName("OldPassword").IsEncrypted(provider);
         }
     }
 }
