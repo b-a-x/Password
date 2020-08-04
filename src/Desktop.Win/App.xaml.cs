@@ -24,14 +24,22 @@ namespace Desktop.Win
             this.InitializeComponent();
             this.Suspending += OnSuspending;
             using (var context = new ApplicationContext())
-            {    
+            {
                 try
                 {
-                    context.Migrate();
+                   context.Migrate();
                 }
+                /*catch (SqliteException _)
+                {
+                    var passwordInfos = context.PasswordInfos.ToArray();
+                    context.Database.EnsureDeleted();
+                    context.Migrate();
+                    context.PasswordInfos.AddRange(passwordInfos);
+                    context.SaveChanges();
+                }*/
                 catch (Exception e)
                 {
-                    //TODO Логирование + обрпботка ошибок
+                    //TODO Логирование + обработка ошибок
                     throw e;
                 }
             }

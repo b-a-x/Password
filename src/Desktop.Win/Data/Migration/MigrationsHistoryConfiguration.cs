@@ -13,8 +13,8 @@ namespace Desktop.Win.Data.Migration
             builder.HasIndex(p => p.Id).IsUnique();
 
             builder.Property(u => u.Number).HasColumnName("Number").IsRequired();
-            builder.Property(u => u.Name).HasColumnName("Name").IsRequired();
-            builder.Property(u => u.DataCreated).HasColumnName("DataCreated").IsRequired();
+            builder.Property(u => u.FullName).HasColumnName("FullName").HasColumnType("nvarchar(50)").IsRequired();
+            builder.Property(u => u.DataCreated).HasColumnName("DataCreated").HasColumnType("datetime2").IsRequired();
             
             builder.Ignore(u => u.FullPatch);
         }

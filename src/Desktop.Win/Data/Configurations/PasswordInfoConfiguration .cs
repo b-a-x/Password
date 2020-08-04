@@ -8,6 +8,7 @@ namespace Desktop.Win.Data.Configurations
 {
     public class PasswordInfoConfiguration : IEntityTypeConfiguration<PasswordInfo>
     {
+        private const string nvarchar100 = "nvarchar(100)";
         //TODO: Сделать асинхронное шифрование
         private IEncryptionProvider provider = new AesProvider(Encoding.UTF8.GetBytes("keqwertyuiopqwertyuiqwertyuioqwe"), Encoding.UTF8.GetBytes("qwertyuiopqwerty"));
 
@@ -19,9 +20,9 @@ namespace Desktop.Win.Data.Configurations
             builder.HasIndex(p => p.Id).IsUnique();
 
             builder.Property(u => u.Name).HasColumnName("Name").IsRequired();
-            builder.Property(u => u.Login).HasColumnName("Login").IsRequired().IsEncrypted(provider);
-            builder.Property(u => u.Password).HasColumnName("Password").IsRequired().IsEncrypted(provider);
-            builder.Property(u => u.OldPassword).HasColumnName("OldPassword").IsEncrypted(provider);
+            builder.Property(u => u.Login).HasColumnName("Login").HasColumnType(nvarchar100).IsRequired().IsEncrypted(provider);
+            builder.Property(u => u.Password).HasColumnName("Password").HasColumnType(nvarchar100).IsRequired().IsEncrypted(provider);
+            builder.Property(u => u.OldPassword).HasColumnName("OldPassword").HasColumnType(nvarchar100).IsEncrypted(provider);
         }
     }
 }

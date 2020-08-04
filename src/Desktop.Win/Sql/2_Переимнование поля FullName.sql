@@ -1,0 +1,1 @@
+﻿ALTER TABLE MigrationsHistory RENAME COLUMN name to FullName;

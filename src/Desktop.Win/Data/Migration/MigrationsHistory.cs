@@ -9,17 +9,17 @@ namespace Desktop.Win.Data.Migration
         {
         }
 
-        public MigrationsHistory(int number, string name)
+        public MigrationsHistory(int number, string fullName)
         {
             Number = number;
-            Name = name;
+            FullName = fullName;
         }
 
         public int Id { get; set; }
         public int Number { get; set; }
-        public string Name { get; set; }
+        public string FullName { get; set; }
         public DateTime DataCreated { get; set; }
         public string FullPatch { get; set; }
-        public string CreateScript => $"INSERT INTO MigrationsHistory ({nameof(Number)}, {nameof(Name)}, {nameof(DataCreated)}) VALUES({Number}, '{Name}', datetime());";
+        public string CreateScript => $"INSERT INTO MigrationsHistory ({nameof(Number)}, {nameof(FullName)}, {nameof(DataCreated)}) VALUES({Number}, '{FullName}', datetime());";
     }
 }
