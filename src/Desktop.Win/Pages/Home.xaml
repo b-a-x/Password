@@ -18,12 +18,8 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50px"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="1" Visibility="Collapsed"
-                           Text="{x:Bind Name}"
-                           x:Phase="1"
-                           Style="{ThemeResource BaseTextBlockStyle}"
-                           Margin="12,6,0,0"/>
                 <Ellipse x:Name="Ellipse"
                          Grid.RowSpan="2"
                          Width ="32"
@@ -33,6 +29,7 @@
                          HorizontalAlignment="Center"
                          Fill="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
                 <TextBlock Grid.Column="1"
+                           Grid.Row="0"
                            Text="{x:Bind Name}"
                            x:Phase="1"
                            Style="{ThemeResource BaseTextBlockStyle}"
@@ -44,18 +41,26 @@
                             Style="{ThemeResource BodyTextBlockStyle}"
                             Margin="12,0,0,6"/>
             </Grid>
+            
         </DataTemplate>
     </Page.Resources>
     <Grid>
         <ListView
             x:Name ="HomePageListView"
             SelectionMode="Single"
-            ItemTemplate="{StaticResource PasswordInfoListViewTemplate}" Margin="0,40,0,0"/>
-
-        <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" VerticalAlignment="Top" Margin="0,0,0,7">
-            <AppBarButton Icon="Add" Label="Добавить" Click="HomeCreateOnClick"/>
-            <AppBarButton Icon="Edit" Label="Изменить" Click="HomeUpdateOnClick"/>
-            <AppBarButton Icon="Delete" Label="Удалить" Click="HomeDeleteOnClick"/>
-        </CommandBar>
+            ItemTemplate="{StaticResource PasswordInfoListViewTemplate}" 
+            Margin="0,0,0,0"
+            Tapped="HomePageListView_OnTapped"
+            HorizontalContentAlignment="Stretch"
+            RightTapped="HomePageListView_OnRightTapped">
+            <ListView.Resources>
+                <MenuFlyout x:Name="allContactsMenuFlyout">
+                    <MenuFlyout.Items>
+                        <MenuFlyoutItem x:Name="Edit"  Text="Изменить" Icon="Edit" Click="HomeUpdateOnClick"/>
+                        <MenuFlyoutItem x:Name="Remove" Text="Удалить" Icon="Delete" Click="HomeDeleteOnClick" />
+                    </MenuFlyout.Items>
+                </MenuFlyout>
+            </ListView.Resources>
+        </ListView>
     </Grid>
 </Page>

@@ -9,7 +9,7 @@ namespace Desktop.Win.Data.Configurations
     public class PasswordInfoConfiguration : IEntityTypeConfiguration<PasswordInfo>
     {
         private const string nvarchar100 = "nvarchar(100)";
-        //TODO: Сделать асинхронное шифрование
+        //TODO: Сделать асимметричное шифрование
         private IEncryptionProvider provider = new AesProvider(Encoding.UTF8.GetBytes("keqwertyuiopqwertyuiqwertyuioqwe"), Encoding.UTF8.GetBytes("qwertyuiopqwerty"));
 
         public void Configure(EntityTypeBuilder<PasswordInfo> builder)

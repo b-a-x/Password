@@ -146,6 +146,9 @@
     <Compile Include="Pages\PasswordInfoPage.xaml.cs">
       <DependentUpon>PasswordInfoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PasswordInfoPageReadOnly.xaml.cs">
+      <DependentUpon>PasswordInfoPageReadOnly.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SettingsNavPaneItem.xaml.cs">
       <DependentUpon>SettingsNavPaneItem.xaml</DependentUpon>
     </Compile>
@@ -188,6 +191,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\PasswordInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PasswordInfoPageReadOnly.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media.Animation;
 using Desktop.Win.Data;
 using Desktop.Win.Model;
 using Desktop.Win.ViewModel;
@@ -9,6 +11,7 @@ namespace Desktop.Win.Pages
 {
     public sealed partial class Home : Page
     {
+        private int idPasswordInfo;
         public Home()
         {
             this.InitializeComponent();
@@ -28,25 +31,34 @@ namespace Desktop.Win.Pages
 
         private void HomeUpdateOnClick(object sender, RoutedEventArgs e)
         {
-            if (HomePageListView?.SelectedItem is PasswordInfoVM info)
-                Frame.Navigate(typeof(PasswordInfoPage), info.Id);
+            Frame.Navigate(typeof(PasswordInfoPage), idPasswordInfo, new CommonNavigationTransitionInfo());
         }
 
         private void HomeDeleteOnClick(object sender, RoutedEventArgs e)
         {
-            if (HomePageListView?.SelectedItem is PasswordInfoVM info)
+            using (ApplicationContext context = new ApplicationContext())
             {
-                using (ApplicationContext context = new ApplicationContext())
+                PasswordInfo password = context.PasswordInfos.Find(idPasswordInfo);
+                if (password != null)
                 {
-                    PasswordInfo password = context.PasswordInfos.Find(info.Id);
-                    if (password != null)
-                    {
-                        context.PasswordInfos.Remove(password);
-                        context.SaveChanges();
-                        HomePageListView.ItemsSource = context.PasswordInfos.ToList();
-                    }
+                    context.PasswordInfos.Remove(password);
+                    context.SaveChanges(); 
+                    HomePageListView.ItemsSource = context.PasswordInfos.Select(x => new PasswordInfoVM(x));
                 }
             }
+        }
+
+        private void HomePageListView_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (HomePageListView?.SelectedItem is PasswordInfoVM info)
+                Frame.Navigate(typeof(PasswordInfoPageReadOnly), info.Id, new CommonNavigationTransitionInfo());
+        }
+
+        private void HomePageListView_OnRightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            ListView listView = (ListView)sender;
+            allContactsMenuFlyout.ShowAt(listView, e.GetPosition(listView));
+            idPasswordInfo = ((PasswordInfoVM) ((FrameworkElement)e.OriginalSource).DataContext).Id;
         }
     }
 }

@@ -29,7 +29,6 @@ namespace Desktop.Win.Pages
 
             if (passwordInfo != null)
             {
-                headerBlock.Text = "Редактирование информации о пароле";
                 nameBox.Text = passwordInfo.Name;
                 loginBox.Text = passwordInfo.Login;
                 passwordBox.Text = passwordInfo.Password;
@@ -62,13 +61,14 @@ namespace Desktop.Win.Pages
 
                 context.SaveChanges();
             }
-            GoToMainPage();
+            //GoToMainPage();
         }
 
-        private void CancelOnClick(object sender, RoutedEventArgs e)
+        /*private void CancelOnClick(object sender, RoutedEventArgs e)
         {
             GoToMainPage();
         }
+        */
 
         private void GoToMainPage()
         {

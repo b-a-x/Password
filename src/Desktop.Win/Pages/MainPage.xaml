@@ -14,6 +14,7 @@
                         IsBackEnabled="{Binding ElementName=ContentFrame, Path=CanGoBack}">
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Пароли" Icon="ReportHacked" Name="Home"/>
+                <NavigationViewItem Content="Добавить" Icon="Add" Name="PasswordInfoPage"/>
             </NavigationView.MenuItems>
             <Frame x:Name="ContentFrame"/>
         </NavigationView>

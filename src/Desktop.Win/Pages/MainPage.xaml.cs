@@ -48,6 +48,8 @@ namespace Desktop.Win.Pages
                     return typeof(Home);
                 case nameof(SettingsNavPaneItem):
                     return typeof(SettingsNavPaneItem);
+                case nameof(PasswordInfoPage):
+                    return typeof(PasswordInfoPage);
                 default:
                     return null;
             }
