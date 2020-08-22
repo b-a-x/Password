@@ -1,8 +1,8 @@
 ﻿using Desktop.Win.Data.Encryption;
-using Desktop.Win.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Text;
+using Passwords.Model.Entities;
 
 namespace Desktop.Win.Data.Configurations
 {

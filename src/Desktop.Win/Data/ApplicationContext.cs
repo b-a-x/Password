@@ -1,7 +1,7 @@
 ﻿using Desktop.Win.Data.Configurations;
 using Desktop.Win.Data.Migration;
-using Desktop.Win.Model;
 using Microsoft.EntityFrameworkCore;
+using Passwords.Model.Entities;
 
 namespace Desktop.Win.Data
 {

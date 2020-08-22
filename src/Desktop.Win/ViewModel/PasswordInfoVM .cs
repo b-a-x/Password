@@ -1,4 +1,4 @@
-﻿using Desktop.Win.Model;
+﻿using Passwords.Model.Entities;
 
 namespace Desktop.Win.ViewModel
 {

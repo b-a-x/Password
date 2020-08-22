@@ -8,3 +8,5 @@
 /src/Desktop.Win/obj
 /src/Server/bin
 /src/Server/obj
+/src/Model/obj
+/src/Model/bin

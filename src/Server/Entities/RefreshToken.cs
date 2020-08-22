@@ -1,4 +1,5 @@
 ﻿using System;
+using Passwords.Model.Entities;
 
 namespace Passwords.Server.Entities
 {

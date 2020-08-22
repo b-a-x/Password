@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using Passwords.Model.Entities;
 
 namespace Passwords.Server.Entities
 {

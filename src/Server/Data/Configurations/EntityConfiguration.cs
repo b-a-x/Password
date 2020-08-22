@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Passwords.Server.Entities;
+using Passwords.Model.Entities;
 
 namespace Passwords.Server.Data.Configurations
 {

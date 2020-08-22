@@ -1,4 +1,4 @@
-﻿namespace Passwords.Server.Entities
+﻿namespace Passwords.Model.Entities
 {
     public class Entity
     {
