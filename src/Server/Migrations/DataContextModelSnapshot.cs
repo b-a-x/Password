@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Passwords.Server.Data;
 
@@ -26,21 +27,29 @@ namespace Passwords.Server.Migrations
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasColumnName("FirstName")
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasColumnName("LastName")
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Password")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasColumnName("Password")
+                        .HasColumnType("varchar(100)");
 
-                    b.Property<string>("Type")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("text");
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnName("UserName")
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Id")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
@@ -55,30 +64,42 @@ namespace Passwords.Server.Migrations
                                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                             b1.Property<DateTime>("Created")
-                                .HasColumnType("timestamp without time zone");
+                                .HasColumnName("Created")
+                                .HasColumnType("timestamptz");
 
                             b1.Property<string>("CreatedByIp")
-                                .HasColumnType("text");
+                                .IsRequired()
+                                .HasColumnName("CreatedByIp")
+                                .HasColumnType("varchar(20)");
 
                             b1.Property<DateTime>("Expires")
-                                .HasColumnType("timestamp without time zone");
+                                .HasColumnName("Expires")
+                                .HasColumnType("timestamptz");
 
                             b1.Property<string>("ReplacedByToken")
+                                .HasColumnName("ReplacedByToken")
                                 .HasColumnType("text");
 
                             b1.Property<DateTime?>("Revoked")
-                                .HasColumnType("timestamp without time zone");
+                                .HasColumnName("Revoked")
+                                .HasColumnType("timestamptz");
 
                             b1.Property<string>("RevokedByIp")
-                                .HasColumnType("text");
+                                .HasColumnName("RevokedByIp")
+                                .HasColumnType("varchar(20)");
 
                             b1.Property<string>("Token")
+                                .IsRequired()
+                                .HasColumnName("Token")
                                 .HasColumnType("text");
 
                             b1.Property<int>("UserId")
                                 .HasColumnType("integer");
 
                             b1.HasKey("Id");
+
+                            b1.HasIndex("Id")
+                                .IsUnique();
 
                             b1.HasIndex("UserId");
 

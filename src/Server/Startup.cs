@@ -84,6 +84,8 @@ namespace Passwords.Server
 
             app.UseEndpoints(x => x.MapControllers());
 
+            //DBInitialize.EnsureCreated(context);
+            //DBInitialize.CreateUser(context);
             DBInitialize.Migrate(context);
         }
     }

@@ -19,7 +19,7 @@ namespace Passwords.Server.Models
             Id = user.Id;
             FirstName = user.FirstName;
             LastName = user.LastName;
-            Username = user.Username;
+            Username = user.UserName;
             JwtToken = jwtToken;
             RefreshToken = refreshToken;
         }

@@ -18,7 +18,7 @@ namespace Passwords.Server.Helpers
 
         public static void CreateUser(DataContext context)
         {
-            context.Users.Add(new User { FirstName = "Test", LastName = "User", Username = "test", Password = "test" });
+            context.Users.Add(new User { FirstName = "Test", LastName = "User", UserName = "test", Password = "test" });
             context.SaveChanges();
         }
     }
