@@ -7,6 +7,10 @@ namespace Passwords.Server.Data
     {
         public DbSet<User> Users { get; set; }
 
-        public DataContext(DbContextOptions<DataContext> options) : base(options) { }
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        {
+            //TODO: Migrations
+            Database.EnsureCreated();
+        }
     }
 }
