@@ -8,7 +8,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Passwords.Server.Data;
-using Passwords.Server.Entities;
 using Passwords.Server.Helpers;
 using Passwords.Server.Services;
 
@@ -72,9 +71,6 @@ namespace Passwords.Server
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext context)
         {
-            context.Users.Add(new User { FirstName = "Test", LastName = "User", Username = "test", Password = "test" });
-            context.SaveChanges();
-
             app.UseRouting();
 
             app.UseCors(x => x
@@ -87,6 +83,8 @@ namespace Passwords.Server
             app.UseAuthorization();
 
             app.UseEndpoints(x => x.MapControllers());
+
+            DBInitialize.Migrate(context);
         }
     }
 }
