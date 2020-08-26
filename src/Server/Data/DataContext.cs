@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Passwords.Model.Entities;
 using Passwords.Server.Data.Configurations;
-using Passwords.Server.Entities;
+
 
 namespace Passwords.Server.Data
 {
@@ -9,6 +10,7 @@ namespace Passwords.Server.Data
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<PasswordInfo> PasswordInfos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

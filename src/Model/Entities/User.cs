@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using Passwords.Model.Entities;
 
-namespace Passwords.Server.Entities
+namespace Passwords.Model.Entities
 {
     public class User : Entity
     {
@@ -15,5 +14,8 @@ namespace Passwords.Server.Entities
 
         [JsonIgnore]
         public List<RefreshToken> RefreshTokens { get; set; }
+
+        [JsonIgnore]
+        public List<PasswordInfo> PasswordInfos { get; set; }
     }
 }

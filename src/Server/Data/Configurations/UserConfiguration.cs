@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Passwords.Server.Entities;
+using Passwords.Model.Entities;
 
 namespace Passwords.Server.Data.Configurations
 {
@@ -30,6 +30,8 @@ namespace Passwords.Server.Data.Configurations
                 rt.Property(x => x.RevokedByIp).HasColumnName("RevokedByIp").HasColumnType(VarcharValue(20));
                 rt.Property(x => x.Token).HasColumnName("Token").HasColumnType(VarcharValue()).IsRequired();
             });
+
+            builder.OwnsMany(x => x.PasswordInfos);
         }
     }
 }

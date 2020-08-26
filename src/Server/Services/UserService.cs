@@ -7,8 +7,8 @@ using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Passwords.Model.Entities;
 using Passwords.Server.Data;
-using Passwords.Server.Entities;
 using Passwords.Server.Helpers;
 using Passwords.Server.Models;
 

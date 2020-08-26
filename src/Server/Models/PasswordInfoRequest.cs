@@ -1,8 +1,6 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Passwords.Model.Entities
+﻿namespace Passwords.Server.Models
 {
-    public class PasswordInfo : Entity
+    public class PasswordInfoRequest
     {
         private string oldPassword;
         public string Name { get; set; }
@@ -15,7 +13,6 @@ namespace Passwords.Model.Entities
             set => oldPassword = value;
         }
 
-        [JsonIgnore]
-        public User User { get; set; }
+        public int UserId { get; set; }
     }
 }

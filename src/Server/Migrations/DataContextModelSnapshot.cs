@@ -19,7 +19,7 @@ namespace Passwords.Server.Migrations
                 .HasAnnotation("ProductVersion", "3.1.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("Passwords.Server.Entities.User", b =>
+            modelBuilder.Entity("Passwords.Model.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -54,9 +54,39 @@ namespace Passwords.Server.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Passwords.Server.Entities.User", b =>
+            modelBuilder.Entity("Passwords.Model.Entities.User", b =>
                 {
-                    b.OwnsMany("Passwords.Server.Entities.RefreshToken", "RefreshTokens", b1 =>
+                    b.OwnsMany("Passwords.Model.Entities.PasswordInfo", "PasswordInfos", b1 =>
+                        {
+                            b1.Property<int>("UserId")
+                                .HasColumnType("integer");
+
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer")
+                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                            b1.Property<string>("Login")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("Name")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("OldPassword")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("Password")
+                                .HasColumnType("text");
+
+                            b1.HasKey("UserId", "Id");
+
+                            b1.ToTable("PasswordInfos");
+
+                            b1.WithOwner("User")
+                                .HasForeignKey("UserId");
+                        });
+
+                    b.OwnsMany("Passwords.Model.Entities.RefreshToken", "RefreshTokens", b1 =>
                         {
                             b1.Property<int>("Id")
                                 .ValueGeneratedOnAdd()

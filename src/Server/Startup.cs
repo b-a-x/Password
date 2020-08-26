@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Passwords.Server.Data;
 using Passwords.Server.Helpers;
+using Passwords.Server.Middlewaries;
 using Passwords.Server.Services;
 
 namespace Passwords.Server
@@ -67,10 +68,13 @@ namespace Passwords.Server
                 });
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IPasswordInfoService, PasswordInfoService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext context)
         {
+            app.UseMiddleware<LogErrorMiddleware>();
+
             app.UseRouting();
 
             app.UseCors(x => x

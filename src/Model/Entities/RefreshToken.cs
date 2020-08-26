@@ -1,7 +1,6 @@
 ﻿using System;
-using Passwords.Model.Entities;
 
-namespace Passwords.Server.Entities
+namespace Passwords.Model.Entities
 {
     public class RefreshToken : Entity
     {

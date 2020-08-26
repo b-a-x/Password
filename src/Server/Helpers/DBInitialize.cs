@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Passwords.Model.Entities;
 using Passwords.Server.Data;
-using Passwords.Server.Entities;
 
 namespace Passwords.Server.Helpers
 {

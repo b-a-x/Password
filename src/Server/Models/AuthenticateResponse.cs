@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Passwords.Server.Entities;
+using Passwords.Model.Entities;
 
 namespace Passwords.Server.Models
 {
