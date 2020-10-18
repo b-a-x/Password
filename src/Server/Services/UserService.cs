@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using Passwords.Model.Entities;
 using Passwords.Server.Data;
-using Passwords.Server.Helpers;
+using Passwords.Server.Managers;
 using Passwords.Server.Models;
 
 namespace Passwords.Server.Services
@@ -25,27 +19,25 @@ namespace Passwords.Server.Services
 
     public class UserService : IUserService
     {
-        private DataContext _context;
-        private readonly AppSettings _appSettings;
+        private readonly DataContext _context;
+        private readonly IJwtManager jwtManager;
 
-        public UserService(
-            DataContext context,
-            IOptions<AppSettings> appSettings)
+        public UserService(DataContext context, IJwtManager jwtManager)
         {
             _context = context;
-            _appSettings = appSettings.Value;
+            this.jwtManager = jwtManager;
         }
 
         public AuthenticateResponse Authenticate(AuthenticateRequest model, string ipAddress)
         {
-            var user = _context.Users.SingleOrDefault(x => x.UserName == model.Username && x.Password == model.Password);
+            User user = _context.Users.SingleOrDefault(x => x.UserName == model.Username && x.Password == model.Password);
 
             // return null if user not found
             if (user == null) return null;
 
             // authentication successful so generate jwt and refresh tokens
-            string jwtToken = generateJwtToken(user);
-            RefreshToken refreshToken = generateRefreshToken(ipAddress);
+            string jwtToken = jwtManager.GenerateToken(user.Id.ToString());
+            RefreshToken refreshToken = jwtManager.GenerateRefreshToken(ipAddress);
 
             // save refresh token
             user.RefreshTokens.Add(refreshToken);
@@ -68,7 +60,7 @@ namespace Passwords.Server.Services
             if (!refreshToken.IsActive) return null;
 
             // replace old refresh token with a new one and save
-            var newRefreshToken = generateRefreshToken(ipAddress);
+            var newRefreshToken = jwtManager.GenerateRefreshToken(ipAddress);
             refreshToken.Revoked = DateTime.UtcNow;
             refreshToken.RevokedByIp = ipAddress;
             refreshToken.ReplacedByToken = newRefreshToken.Token;
@@ -77,7 +69,7 @@ namespace Passwords.Server.Services
             _context.SaveChanges();
 
             // generate new jwt
-            var jwtToken = generateJwtToken(user);
+            var jwtToken = jwtManager.GenerateToken(user.Id.ToString());
 
             return new AuthenticateResponse(user, jwtToken, newRefreshToken.Token);
         }
@@ -111,39 +103,6 @@ namespace Passwords.Server.Services
         public User GetById(int id)
         {
             return _context.Users.Find(id);
-        }
-
-        // helper methods
-
-        private string generateJwtToken(User user)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new[]
-                {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
-                }),
-                Expires = DateTime.UtcNow.AddMinutes(15),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
-        }
-
-        private RefreshToken generateRefreshToken(string ipAddress)
-        {
-            using var rngCryptoServiceProvider = new RNGCryptoServiceProvider();
-            var randomBytes = new byte[64];
-            rngCryptoServiceProvider.GetBytes(randomBytes);
-            return new RefreshToken
-            {
-                Token = Convert.ToBase64String(randomBytes),
-                Expires = DateTime.UtcNow.AddDays(7),
-                Created = DateTime.UtcNow,
-                CreatedByIp = ipAddress
-            };
         }
     }
 }

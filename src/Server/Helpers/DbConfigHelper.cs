@@ -2,11 +2,11 @@
 
 namespace Passwords.Server.Helpers
 {
-    public class DbConfig
+    public class DbConfigHelper
     {
         private readonly string connectionString;
 
-        public DbConfig(string connectionString)
+        public DbConfigHelper(string connectionString)
         {
             this.connectionString = connectionString;
             SetConnectionString();

@@ -9,8 +9,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Passwords.Server.Data;
 using Passwords.Server.Helpers;
+using Passwords.Server.Managers;
 using Passwords.Server.Middlewaries;
 using Passwords.Server.Services;
+using Passwords.Server.Settings;
 
 namespace Passwords.Server
 {
@@ -26,7 +28,7 @@ namespace Passwords.Server
         public void ConfigureServices(IServiceCollection services)
         {
             //Heroku
-            var connectionString = new DbConfig(Environment.GetEnvironmentVariable("DATABASE_URL")).ConnectionString;
+            var connectionString = new DbConfigHelper(Environment.GetEnvironmentVariable("DATABASE_URL")).ConnectionString;
             if (string.IsNullOrEmpty(connectionString))
                 connectionString = configuration.GetConnectionString("DefaultConnection");
 
@@ -42,10 +44,10 @@ namespace Passwords.Server
             services.AddCors();
             services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.IgnoreNullValues = true);
 
-            var appSettingsSection = configuration.GetSection("AppSettings");
-            services.Configure<AppSettings>(appSettingsSection);
+            var appSettingsSection = configuration.GetSection("JwtSettings");
+            services.Configure<JwtSettings>(appSettingsSection);
 
-            var appSettings = appSettingsSection.Get<AppSettings>();
+            var appSettings = appSettingsSection.Get<JwtSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
             services.AddAuthentication(x =>
                 {
@@ -69,6 +71,8 @@ namespace Passwords.Server
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPasswordInfoService, PasswordInfoService>();
+
+            services.AddSingleton<IJwtManager, JwtManager>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext context)
@@ -88,9 +92,9 @@ namespace Passwords.Server
 
             app.UseEndpoints(x => x.MapControllers());
 
-            //DBInitialize.EnsureCreated(context);
-            //DBInitialize.CreateUser(context);
-            DBInitialize.Migrate(context);
+            //DbInitializeHelper.EnsureCreated(context);
+            //DbInitializeHelper.CreateUser(context);
+            DbInitializeHelper.Migrate(context);
         }
     }
 }

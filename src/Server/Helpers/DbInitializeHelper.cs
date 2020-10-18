@@ -4,7 +4,7 @@ using Passwords.Server.Data;
 
 namespace Passwords.Server.Helpers
 {
-    public static class DBInitialize
+    public static class DbInitializeHelper
     {
         public static void EnsureCreated(DataContext context)
         {
