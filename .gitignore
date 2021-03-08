@@ -2,11 +2,7 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/src/Desktop.Win/Desktop.Win/bin/x64/Debug
-/src/Desktop.Win/Desktop.Win/obj
-/src/Desktop.Win/bin
-/src/Desktop.Win/obj
-/src/Server/bin
-/src/Server/obj
-/src/Model/obj
-/src/Model/bin
+/src/Password.Desktop.Win/bin
+/src/Password.Desktop.Win/obj
+/src/Password.Server.Api/obj
+/src/Password.Server.Api/bin
