@@ -1,9 +1,10 @@
-﻿namespace Desktop.Win.Model
+﻿using System.Text.Json.Serialization;
+
+namespace Passwords.Model.Entities
 {
-    public class PasswordInfo
+    public class PasswordInfo : Entity
     {
         private string oldPassword;
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
@@ -13,5 +14,8 @@
             get => oldPassword ?? string.Empty;
             set => oldPassword = value;
         }
+
+        [JsonIgnore]
+        public User User { get; set; }
     }
 }

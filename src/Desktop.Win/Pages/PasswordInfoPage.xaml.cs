@@ -3,8 +3,8 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Desktop.Win.Data;
-using Desktop.Win.Model;
 using Desktop.Win.ViewModel;
+using Passwords.Model.Entities;
 
 namespace Desktop.Win.Pages
 {

@@ -10,11 +10,11 @@ namespace Passwords.Server.Controllers
     [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class UsersController : ControllerBase
+    public class UserController : ControllerBase
     {
         private IUserService userService;
 
-        public UsersController(IUserService userService)
+        public UserController(IUserService userService)
         {
             this.userService = userService;
         }

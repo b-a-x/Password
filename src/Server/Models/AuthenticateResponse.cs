@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Passwords.Server.Entities;
+using Passwords.Model.Entities;
 
 namespace Passwords.Server.Models
 {
@@ -19,7 +19,7 @@ namespace Passwords.Server.Models
             Id = user.Id;
             FirstName = user.FirstName;
             LastName = user.LastName;
-            Username = user.Username;
+            Username = user.UserName;
             JwtToken = jwtToken;
             RefreshToken = refreshToken;
         }
