@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Text;
 using Password.Desktop.Win.Data.Encryption;
@@ -18,6 +19,7 @@ namespace Password.Desktop.Win.Data.Configurations
 
             builder.HasKey(p => p.Id);
             builder.HasIndex(p => p.Id).IsUnique();
+            builder.Property(o => o.Timestamp).HasColumnName("Timestamp").IsRequired();
 
             builder.Property(u => u.Name).HasColumnName("Name").IsRequired();
             builder.Property(u => u.Login).HasColumnName("Login").HasColumnType(nvarchar100).IsRequired().IsEncrypted(provider);

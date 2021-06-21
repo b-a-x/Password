@@ -1,4 +1,5 @@
-﻿using Password.Desktop.Win.Model;
+﻿using System;
+using Password.Desktop.Win.Model;
 
 namespace Password.Desktop.Win.ViewModel
 {
@@ -11,7 +12,7 @@ namespace Password.Desktop.Win.ViewModel
             this.PasswordInfo = passwordInfo;
         }
 
-        public int Id
+        public Guid Id
         {
             get => PasswordInfo.Id;
             set => PasswordInfo.Id = value;

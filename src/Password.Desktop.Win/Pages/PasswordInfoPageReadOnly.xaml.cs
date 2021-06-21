@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Password.Desktop.Win.Data;
@@ -25,7 +26,7 @@ namespace Password.Desktop.Win.Pages
             {
                 using (var context = new ApplicationContext())
                 {
-                    passwordInfo = new PasswordInfoVM(context.PasswordInfos.FirstOrDefault(c => c.Id == (int)e.Parameter));
+                    passwordInfo = new PasswordInfoVM(context.PasswordInfos.FirstOrDefault(c => c.Id == (Guid)e.Parameter));
                 }
             }
 
