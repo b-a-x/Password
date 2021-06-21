@@ -1,10 +1,13 @@
-﻿namespace Password.Desktop.Win.Model
+﻿using System;
+
+namespace Password.Desktop.Win.Model
 {
     public class PasswordInfo
     {
         private string _oldPassword;
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
+        public long Timestamp { get; set; }
         public string Name { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }

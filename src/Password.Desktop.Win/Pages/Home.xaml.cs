@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -11,7 +12,7 @@ namespace Password.Desktop.Win.Pages
 {
     public sealed partial class Home : Page
     {
-        private int idPasswordInfo;
+        private Guid idPasswordInfo;
         public Home()
         {
             this.InitializeComponent();

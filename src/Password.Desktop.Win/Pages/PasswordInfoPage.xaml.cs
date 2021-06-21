@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -20,7 +21,7 @@ namespace Password.Desktop.Win.Pages
         {
             if (e.Parameter != null)
             {
-                int id = (int)e.Parameter;
+                Guid id = (Guid)e.Parameter;
                 using (ApplicationContext context = new ApplicationContext())
                 {
                     passwordInfo = new PasswordInfoVM(context.PasswordInfos.FirstOrDefault(c => c.Id == id));
